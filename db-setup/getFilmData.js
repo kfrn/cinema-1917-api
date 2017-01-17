@@ -4,6 +4,7 @@ const addFilmtoDB = require('./addFilmtoDB')
 module.exports = getFilmData
 
 function getFilmData(id) {
+
   omdb.get({imdb: id}, true, function(err, res) {
     if (err) return console.error(err)
     if (!res) return console.log("Film not found!")
@@ -56,6 +57,3 @@ function formatPlot(input) {
   if (input) return input
   else return 'unknown'
 }
-
-// Testing
-// getFilmData('tt0008663')
