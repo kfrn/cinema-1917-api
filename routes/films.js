@@ -1,24 +1,36 @@
 var express = require('express')
 var router = express.Router()
 var getAllFilms = require('../db-functions/datafromDB').getAllFilms
+var getFilmsByTitle = require('../db-functions/datafromDB').getFilmsByTitle
 
-/* GET all films (random 100 results) */
-router.get('/', function(req, res, next) {
+/* GET random film */
+// http://localhost:3000/api/v1/random/
+router.get('/random/', function(req, res, next) {
   getAllFilms()
     .then((req) => {
       var randomFilm = req[Math.floor(Math.random() * req.length)]
-      console.log("There are", req.length, "results - giving you a random pick of that", req.length)
-      console.log("A random film is", randomFilm)
-      // res.render('film', randomFilm)
+      console.log({randomFilm})
+      res.status(200)
+      res.json({randomFilm})
     })
     .catch(function(error) {
-      console.log(error)
+      res.send(error)
     })
 })
 
-// /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
+/* GET films via title keyword search */
+// http://localhost:3000/api/v1/films/
+router.get('/films/', function(req, res, next) {
+  var searchTerm = req.headers.titlekeyword
+  getFilmsByTitle(searchTerm)
+    .then((results) => {
+      console.log({results})
+      res.status(200)
+      res.json({results})
+    })
+    .catch(function(error) {
+      res.send(error)
+    })
+})
 
-module.exports = router;
+module.exports = router
