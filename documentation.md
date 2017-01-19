@@ -5,8 +5,7 @@ This API returns JSON-encoded data on films released in 1917.
 As the dataset is static, the API only supports GET requests. It can do the following:
 
 * [Return data on a random film](#return-data-on-a-random-film)
-* [Search by title keyword](#search-by-title-keyword)
-* Search by person (director, writer, actor)
+* [Search by title or person](#search-by-title-or-person)
 * Search by plot keyword
 * Search by genre
 * Search by country
@@ -28,7 +27,7 @@ As the dataset is static, the API only supports GET requests. It can do the foll
  * On success, the HTTP status code in the response header is 200 ('OK').
  * In case of server error, the header status code is a 5xx error code and the response body contains an error object.
 
-The get request will return an object with the key "randomFilm"; the value is an object containing data about that film.
+The get request will return an object with the key "randomFilm", containing an object with data about the film.
 
     {
       "randomFilm": {
@@ -53,17 +52,30 @@ The get request will return an object with the key "randomFilm"; the value is an
 
 ([back to top](#api-documentation))
 
-### Search by title keyword
+### Search by title or person
 
 | Method | Endpoint | Usage | Returns |
 | ------ | -------- | ----- | ------- |
-| GET | `/v1/films/` | Get data on films by title search | data object |
+| GET | `/v1/films/?` | Return films matching the search term | Array of film objects |
 
-The get object must be sent in the header and take the form:
+For searching by title, director, writer, or actors, this API uses query strings that take the form:
 
-    {
-      titleKeyword: "green"
-    }
+    /v1/films?{searchType}={searchTerm}
+
+e.g.:
+
+    /v1/films?title=green
+    /v1/films?actor=Borelli
+    /v1/films?director=Feuillade
+
+This is a keyword search, meaning that 'gold' will also match 'golden', etc.
+
+To match a full name or phrase, the space(s) between the words must be replaced by a plus sign:
+
+    /v1/films?director=Yevgeni+Bauer
+    /v1/films?director=Cecil+B.+DeMille
+
+Capitalization is not required, as the search is not case-sensitive, but initials must be followed by a full stop, as above.
 
 #### Response
 
