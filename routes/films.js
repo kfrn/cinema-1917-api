@@ -1,12 +1,12 @@
+
 var express = require('express')
 var router = express.Router()
-var getAllFilms = require('../db-functions/datafromDB').getAllFilms
-var getFilmsByTitle = require('../db-functions/datafromDB').getFilmsByTitle
+var datafromDB = require('../db-functions/datafromDB')
 
 /* GET random film */
 // http://localhost:3000/api/v1/random/
 router.get('/random/', function(req, res, next) {
-  getAllFilms()
+  datafromDB.getAllFilms()
     .then((req) => {
       var randomFilm = req[Math.floor(Math.random() * req.length)]
       console.log({randomFilm})
@@ -18,19 +18,93 @@ router.get('/random/', function(req, res, next) {
     })
 })
 
-/* GET films via title keyword search */
-// http://localhost:3000/api/v1/films/
-router.get('/films/', function(req, res, next) {
-  var searchTerm = req.headers.titlekeyword
-  getFilmsByTitle(searchTerm)
-    .then((results) => {
-      console.log({results})
-      res.status(200)
-      res.json({results})
-    })
-    .catch(function(error) {
-      res.send(error)
-    })
+/* GET films via keyword search for title, director, writer or actor */
+// http://localhost:3000/api/v1/films?title=green
+router.get('/films', function(req, res, next) {
+  var searchType = Object.keys(req.query)[0]
+  var searchTerm = req.query[Object.keys(req.query)[0]]
+  console.log({searchType}, {searchTerm})
+  switch (searchType) {
+    case 'title':
+      datafromDB.getFilmsByTitle(searchTerm)
+      .then((results) => {
+        console.log({results})
+        res.status(200)
+        res.json({results})
+      })
+      .catch(function(error) {
+        res.send(error)
+      })
+      break
+    case 'director':
+      datafromDB.getFilmsByDirector(searchTerm)
+      .then((results) => {
+        console.log({results})
+        res.status(200)
+        res.json({results})
+      })
+      .catch(function(error) {
+        res.send(error)
+      })
+      break
+    case 'writer':
+      datafromDB.getFilmsByWriter(searchTerm)
+      .then((results) => {
+        console.log({results})
+        res.status(200)
+        res.json({results})
+      })
+      .catch(function(error) {
+        res.send(error)
+      })
+      break
+    case 'actor':
+      datafromDB.getFilmsByActor(searchTerm)
+      .then((results) => {
+        console.log({results})
+        res.status(200)
+        res.json({results})
+      })
+      .catch(function(error) {
+        res.send(error)
+      })
+      break
+    // case 'actor':
+    //   datafromDB.getFilmsByActor(searchTerm)
+    //   .then((results) => {
+    //     console.log({results})
+    //     res.status(200)
+    //     res.json({results})
+    //   })
+    //   .catch(function(error) {
+    //     res.send(error)
+    //   })
+    //   break
+    // case 'actor':
+    //   datafromDB.getFilmsByActor(searchTerm)
+    //   .then((results) => {
+    //     console.log({results})
+    //     res.status(200)
+    //     res.json({results})
+    //   })
+    //   .catch(function(error) {
+    //     res.send(error)
+    //   })
+    //   break
+    // case 'actor':
+    //   datafromDB.getFilmsByActor(searchTerm)
+    //   .then((results) => {
+    //     console.log({results})
+    //     res.status(200)
+    //     res.json({results})
+    //   })
+    //   .catch(function(error) {
+    //     res.send(error)
+    //   })
+    //   break
+    default:
+      res.send('An error occurred')
+  }
 })
 
 module.exports = router

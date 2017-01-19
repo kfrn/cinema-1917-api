@@ -4,7 +4,10 @@ var knex = Knex(config)
 
 module.exports = {
   getAllFilms,
-  getFilmsByTitle
+  getFilmsByTitle,
+  getFilmsByDirector,
+  getFilmsByWriter,
+  getFilmsByActor
 }
 
 function getAllFilms() {
@@ -13,4 +16,16 @@ function getAllFilms() {
 
 function getFilmsByTitle(searchTerm) {
   return knex.raw('SELECT * FROM films WHERE title LIKE \'%' + searchTerm + '%\'')
+}
+
+function getFilmsByDirector(searchTerm) {
+  return knex.raw('SELECT * FROM films WHERE director LIKE \'%' + searchTerm + '%\'')
+}
+
+function getFilmsByWriter(searchTerm) {
+  return knex.raw('SELECT * FROM films WHERE writers LIKE \'%' + searchTerm + '%\'')
+}
+
+function getFilmsByActor(searchTerm) {
+  return knex.raw('SELECT * FROM films WHERE actors LIKE \'%' + searchTerm + '%\'')
 }
