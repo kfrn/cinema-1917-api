@@ -5,11 +5,11 @@ This API returns JSON-encoded data on films released in 1917.
 As the dataset is static, the API only supports GET requests. It can do the following:
 
 * [Return data on a random film](#return-data-on-a-random-film)
-* [Search by title or person](#search-by-title-or-person)
-* Search by plot keyword
-* Search by genre
-* Search by country
-* Search for films by presence of poster
+* [Search by title or person](#search-by-title-or-person)y
+* Search by plot keyword y
+* Search by genre y
+* Search by country y
+* Search for films by presence of poster y
 * Search by runtime
 * Search by release date  
 

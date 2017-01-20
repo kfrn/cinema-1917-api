@@ -69,28 +69,50 @@ router.get('/films', function(req, res, next) {
         res.send(error)
       })
       break
-    // case 'actor':
-    //   datafromDB.getFilmsByActor(searchTerm)
-    //   .then((results) => {
-    //     console.log({results})
-    //     res.status(200)
-    //     res.json({results})
-    //   })
-    //   .catch(function(error) {
-    //     res.send(error)
-    //   })
-    //   break
-    // case 'actor':
-    //   datafromDB.getFilmsByActor(searchTerm)
-    //   .then((results) => {
-    //     console.log({results})
-    //     res.status(200)
-    //     res.json({results})
-    //   })
-    //   .catch(function(error) {
-    //     res.send(error)
-    //   })
-    //   break
+    case 'genre':
+      datafromDB.getFilmsByGenre(searchTerm)
+      .then((results) => {
+        console.log({results})
+        res.status(200)
+        res.json({results})
+      })
+      .catch(function(error) {
+        res.send(error)
+      })
+      break
+    case 'country':
+      datafromDB.getFilmsByCountry(searchTerm)
+      .then((results) => {
+        console.log({results})
+        res.status(200)
+        res.json({results})
+      })
+      .catch(function(error) {
+        res.send(error)
+      })
+      break
+    case 'plotKeyword':
+      datafromDB.getFilmsByPlotKeyword(searchTerm)
+      .then((results) => {
+        console.log({results})
+        res.status(200)
+        res.json({results})
+      })
+      .catch(function(error) {
+        res.send(error)
+      })
+      break
+    case 'hasPoster':
+      datafromDB.getFilmsWithPoster()
+      .then((results) => {
+        console.log({results})
+        res.status(200)
+        res.json({results})
+      })
+      .catch(function(error) {
+        res.send(error)
+      })
+      break
     // case 'actor':
     //   datafromDB.getFilmsByActor(searchTerm)
     //   .then((results) => {

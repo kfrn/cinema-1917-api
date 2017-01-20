@@ -7,7 +7,11 @@ module.exports = {
   getFilmsByTitle,
   getFilmsByDirector,
   getFilmsByWriter,
-  getFilmsByActor
+  getFilmsByActor,
+  getFilmsByGenre,
+  getFilmsByCountry,
+  getFilmsByPlotKeyword,
+  getFilmsWithPoster
 }
 
 function getAllFilms() {
@@ -29,3 +33,19 @@ function getFilmsByWriter(searchTerm) {
 function getFilmsByActor(searchTerm) {
   return knex.raw('SELECT * FROM films WHERE actors LIKE \'%' + searchTerm + '%\'')
 }
+
+function getFilmsByGenre(searchTerm) {
+  return knex.raw('SELECT * FROM films WHERE genres LIKE \'%' + searchTerm + '%\'')
+}
+
+function getFilmsByCountry(searchTerm) {
+  return knex.raw('SELECT * FROM films WHERE countries LIKE \'%' + searchTerm + '%\'')
+}
+
+function getFilmsByPlotKeyword(searchTerm) {
+  return knex.raw('SELECT * FROM films WHERE plot LIKE \'%' + searchTerm + '%\'')
+}
+
+// function getFilmsWithPoster() {
+//   return knex.raw('SELECT * FROM films WHERE posterURL')
+// }
