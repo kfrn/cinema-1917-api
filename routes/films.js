@@ -94,7 +94,7 @@ router.get('/films', function(req, res, next) {
         res.send(error)
       })
       break
-    case 'hasPoster':
+    case 'poster':
       datafromDB.getFilmsWithPoster(searchTerm)
       .then((results) => {
         res.status(200)
@@ -104,16 +104,16 @@ router.get('/films', function(req, res, next) {
         res.send(error)
       })
       break
-    // case 'runtime':
-    //   datafromDB.hasRunTime(searchTerm)
-    //   .then((results) => {
-    //     res.status(200)
-    //     res.json({results})
-    //   })
-    //   .catch(function(error) {
-    //     res.send(error)
-    //   })
-    //   break
+    case 'runtime':
+      datafromDB.hasRunTime(searchTerm)
+      .then((results) => {
+        res.status(200)
+        res.json({results})
+      })
+      .catch(function(error) {
+        res.send(error)
+      })
+      break
     // case 'actor':
     //   datafromDB.getFilmsByActor(searchTerm)
     //   .then((results) => {

@@ -8,8 +8,6 @@ As the dataset is static, the API only supports GET requests. It can do the foll
 * [Search films using a range of parameters](#search-by-parameter), including title, director, actor, genre, country, plot keyword
 * Return a list of the [countries or genres](#country-and-genre-lists) represented in the dataset
 
-To fix
-* Has runtime  
 To add?
 * Runtime - with lower & upper limits
 * Release date - day/month?
@@ -80,7 +78,8 @@ Here are a list of the search parameters that are supported:
 | genre | <p>To see a list of genres represented in the dataset, click [here](./genres_and_countries.md#genres).</p> <p>To access a list of genres directly via the API, see [here](#country-and-genre-lists).</p>   | `/v1/films?genre=war` |
 | country | <p>To see a list of countries represented in the dataset, click [here](./genres_and_countries.md#countries).</p> <p>To access a list of countries directly via the API, see [here](#country-and-genre-lists).</p> | `/v1/films?country=Norway` |
 | plotKeyword | Any string, e.g. "banana" | `/v1/films?plotKeyword=banana` |
-| hasPoster | `yes` or `no` | `/v1/films?hasPoster=yes` |
+| poster | `yes` or `no` | `/v1/films?poster=yes` |
+| runtime | `yes` or `no` | `/v1/films?runtime=yes` |
 
 <!-- | x | x | x | -->
 
