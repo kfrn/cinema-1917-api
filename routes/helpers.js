@@ -7,6 +7,7 @@ router.get('/countries/', function(req, res, next) {
   categoryData.getCountries()
     .then(function(req) {
       var countryList = req.map((elem) => elem.countries)
+      // TODO. Doesn't account for two word countries e.g. South Africa. 
       countryList = countryList.join(" ").replace(/\,/g, '').split(" ").sort().filter((item, idx, self) => idx == self.indexOf(item))
       res.json({countryList})
     })
