@@ -5,12 +5,11 @@ This API returns JSON-encoded data on films released in 1917.
 As the dataset is static, the API only supports GET requests. It can do the following:
 
 * [Return data on a random film](#return-data-on-a-random-film)
-* [Search by title or person](#search-by-title-or-person)y
-* Search by plot keyword y
-* Search by genre y
-* Search by country y
-* Search for films by presence of poster y
-* Search by has runtime y
+* [Search using a range of parameters](#search-by-parameter), including title, director, actor, genre, country, plot keyword
+
+To fix
+* Has poster
+* Has runtime
 
 To add?
 * Runtime - with lower & upper limits
@@ -55,13 +54,13 @@ The get request will return an object with the key "randomFilm", containing an o
 
 ([back to top](#api-documentation))
 
-### Search by title or person
+### Search by parameter
 
 | Method | Endpoint | Usage | Returns |
 | ------ | -------- | ----- | ------- |
 | GET | `/v1/films/?` | Return films matching the search term | Array of film objects |
 
-For searching by title, director, writer, or actors, this API uses query strings that take the form:
+For searching the film records, this API uses query strings that take the form:
 
     /v1/films?{searchType}={searchTerm}
 
@@ -71,14 +70,32 @@ e.g.:
     /v1/films?actor=Borelli
     /v1/films?director=Feuillade
 
-This is a keyword search, meaning that 'gold' will also match 'golden', etc.
+Here are a list of the search parameters that are supported:
 
-To match a full name or phrase, the space(s) between the words must be replaced by a plus sign:
+| Type of search | Valid search terms | Example |
+| ------ | -------- | ----- |
+| title | Any string, e.g. "uomini" | `/v1/films?title=uomini` |
+| director | Any string, e.g. "Lubitsch" | `/v1/films?director=lubitsch` |
+| writer | Any string, e.g. "Annunzio" | `/v1/films?director=Annunzio` |
+| actor | Any string, e.g. "Kholodnaya" | `/v1/films?actor=Kholodnaya` |
+| genre | The following genres are represented in the dataset:  <ul><li>Action</li><li>Adventure</li><li>Animation</li><li>Biography</li><li>Comedy</li><li>Crime</li><li>Documentary</li><li>Drama</li><li>Family</li><li>Fantasy</li><li>History</li><li>Horror</li><li>Music</li><li>Mystery</li><li>News</li><li>Romance</li><li>Short <sup><a href="#fn1" id="ref1">1</a></sup></li><li>Thriller</li><li>War</li><li>Western</li></ul> <p>Note that for many films, the genre(s) are unknown.</p>  <sup id="fn1">1. Although I would not consider 'short' a genre <em>per se</em>, it is listed as such on IMDb.</sup>  | `/v1/films?genre=war` |
+| country | The following countries are represented in the dataset:  <ul><li>Argentina</li><li>Australia</li><li>Austria</li><li>Azerbaijan</li><li>Belgium</li><li>Bolivia</li><li>Brazil</li><li>Bulgaria</li><li>Chile</li><li>Czechoslovakia</li><li>Denmark</li><li>France</li><li>Germany</li><li>Greece</li><li>Hungary</li><li>India</li><li>Ireland</li><li>Italy</li><li>Japan</li><li>Mexico</li><li>Netherlands</li><li>Norway</li><li>Poland</li><li>Portugal</li><li>Russia</li><li>South Africa</li><li>Spain</li><li>Sweden</li><li>Switzerland</li><li>Turkey</li><li>UK</li><li>USA</li><li>Yugoslavia</li></ul>  Please use the above spellings and not variants (e.g., U.S.A. instead of USA).  <p>Also note that some films' country of production is unknown.</p> | `/v1/films?country=Norway` |
+| plotKeyword | Any string, e.g. "banana" | `/v1/films?plotKeyword=banana` |
+<!-- | x | x | x | -->
 
-    /v1/films?director=Yevgeni+Bauer
-    /v1/films?director=Cecil+B.+DeMille
+<!-- <li>item2</li> -->
 
-Capitalization is not required, as the search is not case-sensitive, but initials must be followed by a full stop, as above.
+##### Search notes  
+
+* The searche queries are written to operate via **pattern matching**, meaning that 'gold' will also match 'golden', etc.
+
+* To match a **full name or phrase**, the space(s) between the words must be replaced by a plus sign:
+
+      /v1/films?country=South+Africa  
+      /v1/films?director=Yevgeni+Bauer  
+      /v1/films?director=Cecil+B.+DeMille  
+
+* **Capitalization is not required**, as the search is not case-sensitive, but initials must be followed by a full stop, as shown above.
 
 #### Response
 
@@ -86,7 +103,7 @@ Capitalization is not required, as the search is not case-sensitive, but initial
  * On success, the HTTP status code in the response header is 200 ('OK').
  * In case of server error, the header status code is a 5xx error code and the response body contains an error object.
 
-The get request will return an object with the key "results" and an array of objects, each containing data on a film that matched the search parameter.
+The get request will return an object with the key "results" and an array of objects, each containing data on a film that matched the search parameter. For example, the request `/v1/films?title=green` will return:
 
     {
       "results": [
@@ -144,6 +161,13 @@ The get request will return an object with the key "results" and an array of obj
           "IMDbVotes": null,
           "type": "movie"
         }
+      ]
+    }
+
+If no results are found, the result will be an empty array. For example, the request `/v1/films?title=silver` will return:
+
+    {
+      "results": [
       ]
     }
 

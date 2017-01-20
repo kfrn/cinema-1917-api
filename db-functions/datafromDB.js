@@ -11,8 +11,8 @@ module.exports = {
   getFilmsByGenre,
   getFilmsByCountry,
   getFilmsByPlotKeyword,
-  getFilmsWithPoster,
-  hasRunTime
+  // getFilmsWithPoster,
+  // hasRunTime
 }
 
 function getAllFilms() {
@@ -47,15 +47,18 @@ function getFilmsByPlotKeyword(searchTerm) {
   return knex('films').where('plot', 'like', '%' + searchTerm + '%')
 }
 
-function getFilmsWithPoster(searchTerm) {
-  if (searchTerm = 'yes') return knex('films').where('posterURL', '<>', '""')
-  else return knex.raw('SELECT * FROM films WHERE posterURL IS NULL')
-}
-
-function hasRunTime(searchTerm) {
-  if (searchTerm = 'yes') return knex.raw('SELECT * FROM films WHERE runtime <> "unknown"')
-  else return knex.raw('SELECT * FROM films WHERE runtime = "unknown"')
-}
+// function getFilmsWithPoster(searchTerm) {
+//   if (searchTerm = 'yes') return knex('films').where('posterURL', '<>', '""')
+//   else return knex.raw('SELECT * FROM films WHERE posterURL IS NULL')
+// }
+//
+// function hasRunTime(searchTerm) {
+//   if (searchTerm = 'yes') return knex('films').where('runtime', '<>', 'unknown')
+//   // searchTerm = no not working!!!
+//   // if (searchTerm = 'no') console.log("TBA")
+//   // knex.raw('SELECT * FROM films WHERE runtime = "unknown"')
+//   // knex('films').where('runtime', '"unknown"')
+// }
 
 
 // `SELECT * FROM films WHERE runtime <> "unknown" AND runtime BETWEEN + ${lowerLimit} AND ${upperLimit}`
