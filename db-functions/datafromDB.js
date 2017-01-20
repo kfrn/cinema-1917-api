@@ -11,7 +11,7 @@ module.exports = {
   getFilmsByGenre,
   getFilmsByCountry,
   getFilmsByPlotKeyword,
-  // getFilmsWithPoster,
+  getFilmsWithPoster,
   // hasRunTime
 }
 
@@ -47,11 +47,12 @@ function getFilmsByPlotKeyword(searchTerm) {
   return knex('films').where('plot', 'like', '%' + searchTerm + '%')
 }
 
-// function getFilmsWithPoster(searchTerm) {
-//   if (searchTerm = 'yes') return knex('films').where('posterURL', '<>', '""')
-//   else return knex.raw('SELECT * FROM films WHERE posterURL IS NULL')
-// }
-//
+function getFilmsWithPoster(searchTerm) {
+  if (searchTerm === "yes") {
+    return knex('films').where('posterURL', '<>', '""')
+  } else return knex.raw('SELECT * FROM films WHERE posterURL IS NULL')
+}
+
 // function hasRunTime(searchTerm) {
 //   if (searchTerm = 'yes') return knex('films').where('runtime', '<>', 'unknown')
 //   // searchTerm = no not working!!!
