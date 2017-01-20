@@ -5,7 +5,8 @@ This API returns JSON-encoded data on films released in 1917.
 As the dataset is static, the API only supports GET requests. It can do the following:
 
 * [Return data on a random film](#return-data-on-a-random-film)
-* [Search using a range of parameters](#search-by-parameter), including title, director, actor, genre, country, plot keyword
+* [Search films using a range of parameters](#search-by-parameter), including title, director, actor, genre, country, plot keyword
+* Return the [countries and genres](#country-and-genre-lists) represented in the dataset
 
 To fix
 * Has poster
@@ -78,8 +79,8 @@ Here are a list of the search parameters that are supported:
 | director | Any string, e.g. "Lubitsch" | `/v1/films?director=lubitsch` |
 | writer | Any string, e.g. "Annunzio" | `/v1/films?director=Annunzio` |
 | actor | Any string, e.g. "Kholodnaya" | `/v1/films?actor=Kholodnaya` |
-| genre | The following genres are represented in the dataset:  <ul><li>Action</li><li>Adventure</li><li>Animation</li><li>Biography</li><li>Comedy</li><li>Crime</li><li>Documentary</li><li>Drama</li><li>Family</li><li>Fantasy</li><li>History</li><li>Horror</li><li>Music</li><li>Mystery</li><li>News</li><li>Romance</li><li>Short <sup><a href="#fn1" id="ref1">1</a></sup></li><li>Thriller</li><li>War</li><li>Western</li></ul> <p>Note that for many films, the genre(s) are unknown.</p>  <sup id="fn1">1. Although I would not consider 'short' a genre <em>per se</em>, it is listed as such on IMDb.</sup>  | `/v1/films?genre=war` |
-| country | The following countries are represented in the dataset:  <ul><li>Argentina</li><li>Australia</li><li>Austria</li><li>Azerbaijan</li><li>Belgium</li><li>Bolivia</li><li>Brazil</li><li>Bulgaria</li><li>Chile</li><li>Czechoslovakia</li><li>Denmark</li><li>France</li><li>Germany</li><li>Greece</li><li>Hungary</li><li>India</li><li>Ireland</li><li>Italy</li><li>Japan</li><li>Mexico</li><li>Netherlands</li><li>Norway</li><li>Poland</li><li>Portugal</li><li>Russia</li><li>South Africa</li><li>Spain</li><li>Sweden</li><li>Switzerland</li><li>Turkey</li><li>UK</li><li>USA</li><li>Yugoslavia</li></ul>  Please use the above spellings and not variants (e.g., U.S.A. instead of USA).  <p>Also note that some films' country of production is unknown.</p> | `/v1/films?country=Norway` |
+| genre | The following genres are represented in the dataset:  <ul><li>Action</li><li>Adventure</li><li>Animation</li><li>Biography</li><li>Comedy</li><li>Crime</li><li>Documentary</li><li>Drama</li><li>Family</li><li>Fantasy</li><li>History</li><li>Horror</li><li>Music</li><li>Mystery</li><li>News</li><li>Romance</li><li>Short <sup><a href="#fn1" id="ref1">1</a></sup></li><li>Thriller</li><li>War</li><li>Western</li></ul> <p>Note that for many films, the genre(s) are unknown.</p> <p>To access a list of genres directly via the API, [see here](#country-and-genre-lists).</p> <sup id="fn1">1. Although I would not consider 'short' a genre <em>per se</em>, it is listed as such on IMDb.</sup>  | `/v1/films?genre=war` |
+| country | The following countries are represented in the dataset:  <ul><li>Argentina</li><li>Australia</li><li>Austria</li><li>Azerbaijan</li><li>Belgium</li><li>Bolivia</li><li>Brazil</li><li>Bulgaria</li><li>Chile</li><li>Czechoslovakia</li><li>Denmark</li><li>France</li><li>Germany</li><li>Greece</li><li>Hungary</li><li>India</li><li>Ireland</li><li>Italy</li><li>Japan</li><li>Mexico</li><li>Netherlands</li><li>Norway</li><li>Poland</li><li>Portugal</li><li>Russia</li><li>South Africa</li><li>Spain</li><li>Sweden</li><li>Switzerland</li><li>Turkey</li><li>UK</li><li>USA</li><li>Yugoslavia</li></ul>  <p>Please use the above spellings and not variants (e.g., U.S.A. instead of USA).</p> <p>To access a list of countries directly via the API, [see here](#country-and-genre-lists).</p> <p>Also note that some films' country of production is unknown.</p> | `/v1/films?country=Norway` |
 | plotKeyword | Any string, e.g. "banana" | `/v1/films?plotKeyword=banana` |
 <!-- | x | x | x | -->
 
@@ -87,7 +88,7 @@ Here are a list of the search parameters that are supported:
 
 ##### Search notes  
 
-* The searche queries are written to operate via **pattern matching**, meaning that 'gold' will also match 'golden', etc.
+* The search queries operate via **pattern matching**, meaning that 'gold' will also match 'golden', etc.
 
 * To match a **full name or phrase**, the space(s) between the words must be replaced by a plus sign:
 
@@ -168,6 +169,32 @@ If no results are found, the result will be an empty array. For example, the req
 
     {
       "results": [
+      ]
+    }
+
+([back to top](#api-documentation))
+
+### Country and genre lists
+
+| Method | Endpoint | Usage | Returns |
+| ------ | -------- | ----- | ------- |
+| GET | `/v1/countries/` | Return list of countries | object with array of strings |
+| GET | `/v1/genres/` | Return list of genres | object with array of strings |
+
+#### Response
+
+##### Status Codes:
+ * On success, the HTTP status code in the response header is 200 ('OK').
+ * In case of server error, the header status code is a 5xx error code and the response body contains an error object.
+
+The get request will return an object with the key "countries" or "genres", containing an array which lists all of the countries/genres represented in the dataset.
+
+    {
+      "countries": [
+        "Africa",
+        "Argentina",
+        "Australia",
+        // etc
       ]
     }
 
