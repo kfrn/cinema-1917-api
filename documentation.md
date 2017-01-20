@@ -79,8 +79,8 @@ Here are a list of the search parameters that are supported:
 | director | Any string, e.g. "Lubitsch" | `/v1/films?director=lubitsch` |
 | writer | Any string, e.g. "Annunzio" | `/v1/films?director=Annunzio` |
 | actor | Any string, e.g. "Kholodnaya" | `/v1/films?actor=Kholodnaya` |
-| genre | The following genres are represented in the dataset:  <ul><li>Action</li><li>Adventure</li><li>Animation</li><li>Biography</li><li>Comedy</li><li>Crime</li><li>Documentary</li><li>Drama</li><li>Family</li><li>Fantasy</li><li>History</li><li>Horror</li><li>Music</li><li>Musical</li><li>Mystery</li><li>News</li><li>Romance</li><li>Sci-Fi</li><li>Short <sup><a href="#fn1" id="ref1">1</a></sup></li><li>Sport</li><li>Thriller</li><li>War</li><li>Western</li></ul> <p>Note that for many films, the genre(s) are unknown.</p> <p>To access a list of genres directly via the API, [see here](#country-and-genre-lists).</p> <sup id="fn1">1. Although I would not consider 'short' a genre <em>per se</em>, it is listed as such on IMDb.</sup>  | `/v1/films?genre=war` |
-| country | The following countries are represented in the dataset:  <ul><li>Argentina</li><li>Australia</li><li>Austria</li><li>Azerbaijan</li><li>Belgium</li><li>Bolivia</li><li>Brazil</li><li>Bulgaria</li><li>Chile</li><li>Czechoslovakia</li><li>Denmark</li><li>France</li><li>Germany</li><li>Greece</li><li>Hungary</li><li>India</li><li>Ireland</li><li>Italy</li><li>Japan</li><li>Mexico</li><li>Netherlands</li><li>Norway</li><li>Poland</li><li>Portugal</li><li>Russia</li><li>South Africa</li><li>Spain</li><li>Sweden</li><li>Switzerland</li><li>Turkey</li><li>UK</li><li>USA</li><li>Yugoslavia</li></ul>  <p>Please use the above spellings and not variants (e.g., U.S.A. instead of USA).</p> <p>To access a list of countries directly via the API, [see here](#country-and-genre-lists).</p> <p>Also note that some films' country of production is unknown.</p> | `/v1/films?country=Norway` |
+| genre | <p>To see a list of genres represented in the dataset, click [here](./genres_and_countries.md#genres).</p> <p>To access a list of genres directly via the API, see [here](#country-and-genre-lists).</p>   | `/v1/films?genre=war` |
+| country | <p>To see a list of countries represented in the dataset, click [here](./genres_and_countries.md#countries).</p> <p>To access a list of countries directly via the API, see [here](#country-and-genre-lists).</p> | `/v1/films?country=Norway` |
 | plotKeyword | Any string, e.g. "banana" | `/v1/films?plotKeyword=banana` |
 <!-- | x | x | x | -->
 
@@ -91,12 +91,11 @@ Here are a list of the search parameters that are supported:
 * The search queries operate via **pattern matching**, meaning that 'gold' will also match 'golden', etc.
 
 * To match a **full name or phrase**, the space(s) between the words must be replaced by a plus sign:
-
       ```
       /v1/films?country=South+Africa  
       /v1/films?director=Yevgeni+Bauer  
-      /v1/films?director=Cecil+B.+DeMille  
-      ```
+      /v1/films?director=Cecil+B.+DeMille
+      ```  
 
 * **Capitalization is not required**, as the search is not case-sensitive, but initials must be followed by a full stop, as shown above.
 
