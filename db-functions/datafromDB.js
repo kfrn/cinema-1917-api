@@ -11,7 +11,8 @@ module.exports = {
   getFilmsByGenre,
   getFilmsByCountry,
   getFilmsByPlotKeyword,
-  getFilmsWithPoster
+  getFilmsWithPoster,
+  hasRunTime
 }
 
 function getAllFilms() {
@@ -19,33 +20,42 @@ function getAllFilms() {
 }
 
 function getFilmsByTitle(searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE title LIKE \'%' + searchTerm + '%\'')
+  return knex('films').where('title', 'like', '%' + searchTerm + '%')
 }
 
 function getFilmsByDirector(searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE director LIKE \'%' + searchTerm + '%\'')
+  return knex('films').where('director', 'like', '%' + searchTerm + '%')
 }
 
 function getFilmsByWriter(searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE writers LIKE \'%' + searchTerm + '%\'')
+  return knex('films').where('writers', 'like', '%' + searchTerm + '%')
 }
 
 function getFilmsByActor(searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE actors LIKE \'%' + searchTerm + '%\'')
+  return knex('films').where('actors', 'like', '%' + searchTerm + '%')
 }
 
 function getFilmsByGenre(searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE genres LIKE \'%' + searchTerm + '%\'')
+  return knex('films').where('genres', 'like', '%' + searchTerm + '%')
 }
 
 function getFilmsByCountry(searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE countries LIKE \'%' + searchTerm + '%\'')
+  return knex('films').where('countries', 'like', '%' + searchTerm + '%')
 }
 
 function getFilmsByPlotKeyword(searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE plot LIKE \'%' + searchTerm + '%\'')
+  return knex('films').where('plot', 'like', '%' + searchTerm + '%')
 }
 
-// function getFilmsWithPoster() {
-//   return knex.raw('SELECT * FROM films WHERE posterURL')
-// }
+function getFilmsWithPoster(searchTerm) {
+  if (searchTerm = 'yes') return knex('films').where('posterURL', '<>', '""')
+  else return knex.raw('SELECT * FROM films WHERE posterURL IS NULL')
+}
+
+function hasRunTime(searchTerm) {
+  if (searchTerm = 'yes') return knex.raw('SELECT * FROM films WHERE runtime <> "unknown"')
+  else return knex.raw('SELECT * FROM films WHERE runtime = "unknown"')
+}
+
+
+// `SELECT * FROM films WHERE runtime <> "unknown" AND runtime BETWEEN + ${lowerLimit} AND ${upperLimit}`

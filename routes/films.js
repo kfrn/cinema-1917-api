@@ -1,4 +1,3 @@
-
 var express = require('express')
 var router = express.Router()
 var datafromDB = require('../db-functions/datafromDB')
@@ -28,7 +27,6 @@ router.get('/films', function(req, res, next) {
     case 'title':
       datafromDB.getFilmsByTitle(searchTerm)
       .then((results) => {
-        console.log({results})
         res.status(200)
         res.json({results})
       })
@@ -39,7 +37,6 @@ router.get('/films', function(req, res, next) {
     case 'director':
       datafromDB.getFilmsByDirector(searchTerm)
       .then((results) => {
-        console.log({results})
         res.status(200)
         res.json({results})
       })
@@ -50,7 +47,6 @@ router.get('/films', function(req, res, next) {
     case 'writer':
       datafromDB.getFilmsByWriter(searchTerm)
       .then((results) => {
-        console.log({results})
         res.status(200)
         res.json({results})
       })
@@ -61,7 +57,6 @@ router.get('/films', function(req, res, next) {
     case 'actor':
       datafromDB.getFilmsByActor(searchTerm)
       .then((results) => {
-        console.log({results})
         res.status(200)
         res.json({results})
       })
@@ -72,7 +67,6 @@ router.get('/films', function(req, res, next) {
     case 'genre':
       datafromDB.getFilmsByGenre(searchTerm)
       .then((results) => {
-        console.log({results})
         res.status(200)
         res.json({results})
       })
@@ -83,7 +77,6 @@ router.get('/films', function(req, res, next) {
     case 'country':
       datafromDB.getFilmsByCountry(searchTerm)
       .then((results) => {
-        console.log({results})
         res.status(200)
         res.json({results})
       })
@@ -94,7 +87,6 @@ router.get('/films', function(req, res, next) {
     case 'plotKeyword':
       datafromDB.getFilmsByPlotKeyword(searchTerm)
       .then((results) => {
-        console.log({results})
         res.status(200)
         res.json({results})
       })
@@ -103,9 +95,19 @@ router.get('/films', function(req, res, next) {
       })
       break
     case 'hasPoster':
-      datafromDB.getFilmsWithPoster()
+      datafromDB.getFilmsWithPoster(searchTerm)
       .then((results) => {
         console.log({results})
+        res.status(200)
+        res.json({results})
+      })
+      .catch(function(error) {
+        res.send(error)
+      })
+      break
+    case 'runtime':
+      datafromDB.hasRunTime(searchTerm)
+      .then((results) => {
         res.status(200)
         res.json({results})
       })
@@ -125,7 +127,7 @@ router.get('/films', function(req, res, next) {
     //   })
     //   break
     default:
-      res.send('An error occurred')
+      res.send('Please use a valid query')
   }
 })
 

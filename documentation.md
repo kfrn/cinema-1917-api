@@ -10,8 +10,11 @@ As the dataset is static, the API only supports GET requests. It can do the foll
 * Search by genre y
 * Search by country y
 * Search for films by presence of poster y
-* Search by runtime
-* Search by release date  
+* Search by has runtime y
+
+To add?
+* Runtime - with lower & upper limits
+* Release date - day/month?
 
 ## Requests
 
