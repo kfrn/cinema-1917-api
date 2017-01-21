@@ -9,8 +9,7 @@ As the dataset is static, the API only supports GET requests. It can do the foll
 * Return a list of the [countries or genres](#country-and-genre-lists) represented in the dataset
 
 To add?
-* Runtime - with lower & upper limits
-* Release date - day/month?
+* Release date - day?
 
 ## Requests
 
@@ -78,8 +77,9 @@ Here are a list of the search parameters that are supported:
 | genre | <p>To see a list of genres represented in the dataset, click [here](./genres_and_countries.md#genres).</p> <p>To access a list of genres directly via the API, see [here](#country-and-genre-lists).</p>   | `/v1/films?genre=war` |
 | country | <p>To see a list of countries represented in the dataset, click [here](./genres_and_countries.md#countries).</p> <p>To access a list of countries directly via the API, see [here](#country-and-genre-lists).</p> | `/v1/films?country=Norway` |
 | plotKeyword | Any string, e.g. "banana" | `/v1/films?plotKeyword=banana` |
-| poster | `yes` or `no` | `/v1/films?poster=yes` |
-| runtime | `yes` or `no` | `/v1/films?runtime=yes` |
+| hasPoster | `yes` or `no` | `/v1/films?hasPoster=yes` |
+| hasRuntime | `yes` or `no` | `/v1/films?hasRuntime=yes` |
+| releaseMonth | The short forms of the months: `Jan`, `Feb`, `Mar`, `Apr`, `May`, `Jun`, `Jul`, `Aug`, `Sep`, `Oct`, `Nov`, `Dec`. | `/v1/films?releaseMonth=Sep` |
 
 <!-- | x | x | x | -->
 
@@ -197,3 +197,7 @@ The get request will return an object with the key "countries" or "genres", cont
     }
 
 ([back to top](#api-documentation))
+
+### Potential future features
+
+* Search films by runtime specifying range (lower limit, upper limit)

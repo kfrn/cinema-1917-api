@@ -94,7 +94,7 @@ router.get('/films', function(req, res, next) {
         res.send(error)
       })
       break
-    case 'poster':
+    case 'hasPoster':
       datafromDB.getFilmsWithPoster(searchTerm)
       .then((results) => {
         res.status(200)
@@ -104,7 +104,7 @@ router.get('/films', function(req, res, next) {
         res.send(error)
       })
       break
-    case 'runtime':
+    case 'hasRuntime':
       datafromDB.hasRunTime(searchTerm)
       .then((results) => {
         res.status(200)
@@ -114,6 +114,27 @@ router.get('/films', function(req, res, next) {
         res.send(error)
       })
       break
+    case 'releaseMonth':
+      datafromDB.getFilmsByReleaseMonth(searchTerm)
+      .then((results) => {
+        res.status(200)
+        res.json({results})
+      })
+      .catch(function(error) {
+        res.send(error)
+      })
+      break
+    // case 'actor':
+    //   datafromDB.getFilmsByActor(searchTerm)
+    //   .then((results) => {
+    //     console.log({results})
+    //     res.status(200)
+    //     res.json({results})
+    //   })
+    //   .catch(function(error) {
+    //     res.send(error)
+    //   })
+    //   break
     // case 'actor':
     //   datafromDB.getFilmsByActor(searchTerm)
     //   .then((results) => {
