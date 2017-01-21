@@ -5,11 +5,8 @@ This API returns JSON-encoded data on films released in 1917.
 As the dataset is static, the API only supports GET requests. It can do the following:
 
 * [Return data on a random film](#return-data-on-a-random-film)
-* [Search films using a range of parameters](#search-by-parameter), including title, director, actor, genre, country, plot keyword
+* [Search films using a range of parameters](#search-by-parameter), including title, director, actor, genre, country, plot keyword, poster, release date, etc
 * Return a list of the [countries or genres](#country-and-genre-lists) represented in the dataset
-
-To add?
-* Release date - day?
 
 ## Requests
 
@@ -81,12 +78,13 @@ Here are a list of the search parameters that are supported:
 | hasRuntime | `yes` or `no` | `/v1/films?hasRuntime=yes` |
 | hasReleaseDate | `yes` or `no` | `/v1/films?hasReleaseDate=yes` |
 | releaseMonth | The short forms of the months: `Jan`, `Feb`, `Mar`, `Apr`, `May`, `Jun`, `Jul`, `Aug`, `Sep`, `Oct`, `Nov`, `Dec`. | `/v1/films?releaseMonth=Sep` |
+| releaseDay | Number in the range 1 to 31 | `/v1/films?releaseDay=13` |
 
 <!-- | x | x | x | -->
 
 ##### Search notes  
 
-* The search queries operate via **pattern matching**, meaning that 'gold' will also match 'golden', etc.
+* The text search queries operate via **pattern matching**, meaning that 'gold' will also match 'golden', etc.
 
 * To match a **full name or phrase**, the space(s) between the words must be replaced by a plus sign:
       ```
@@ -171,14 +169,16 @@ If no results are found, the result will be an empty array. For example, the req
       ]
     }
 
+If a request is badly formed, the message `Please use a valid query` will be returned.
+
 ([back to top](#api-documentation))
 
 ### Country and genre lists
 
 | Method | Endpoint | Usage | Returns |
 | ------ | -------- | ----- | ------- |
-| GET | `/v1/countries/` | Return list of countries | object with array of strings |
-| GET | `/v1/genres/` | Return list of genres | object with array of strings |
+| GET | `/v1/countries/` | Return list of countries | object containing array of strings |
+| GET | `/v1/genres/` | Return list of genres | object containing array of strings |
 
 #### Response
 
@@ -201,4 +201,4 @@ The get request will return an object with the key "countries" or "genres", cont
 
 ### Potential future features
 
-* Search films by runtime specifying range (lower limit, upper limit)
+* Search films by runtime, specifying range (lower limit, upper limit)

@@ -135,19 +135,23 @@ router.get('/films', function(req, res, next) {
       })
       break
     case 'releaseDay':
-      datafromDB.hasReleaseDate('yes')
-      .then((initialResults) => {
-        if (searchTerm.length === 1) searchTerm = '0' + searchTerm
-        var results = initialResults.filter((item) => {
-          var firstNumber = item.released.slice(8, 10)
-          if (firstNumber === searchTerm) return item
+      if (Number(searchTerm) >= 32) {
+        res.send('Please search with a number in the range 1 to 31')
+      } else {
+        datafromDB.hasReleaseDate('yes')
+        .then((initialResults) => {
+          if (searchTerm.length === 1) searchTerm = '0' + searchTerm
+          var results = initialResults.filter((item) => {
+            var firstNumber = item.released.slice(8, 10)
+            if (firstNumber === searchTerm) return item
+          })
+          res.status(200)
+          res.json({results})
         })
-        res.status(200)
-        res.json({results})
-      })
-      .catch(function(error) {
-        res.send(error)
-      })
+        .catch(function(error) {
+          res.send(error)
+        })
+      }
       break
     // case 'placeholder':
     //   datafromDB.someFunction(searchTerm)
