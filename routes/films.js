@@ -137,39 +137,21 @@ router.get('/films', function(req, res, next) {
     case 'releaseDay':
       datafromDB.hasReleaseDate('yes')
       .then((initialResults) => {
-        // console.log({initialResults})
-
-        // Test with title - working
-        // var filtered = initialResults.filter((item) => {
-        //   if (/green/i.test(item.title)) return item
-        // })
-        // console.log({filtered})
-
-        // this works
-        // for (var i = 0; i < initialResults.length; i++) {
-        //     if (/\d\d/.test(initialResults[i].released) ) // gives true/false
-        //     console.log(initialResults[i].released)
-        // }
-
-        var filtered = initialResults.filter((item) => {
+        if (searchTerm.length === 1) searchTerm = '0' + searchTerm
+        var results = initialResults.filter((item) => {
           var firstNumber = item.released.slice(8, 10)
-          // console.log({firstNumber});
-          if (firstNumber === '18') return item
-          // need to slice!
+          if (firstNumber === searchTerm) return item
         })
-        console.log({filtered})
-
-        // res.status(200)
-        // res.json({results})
+        res.status(200)
+        res.json({results})
       })
       .catch(function(error) {
         res.send(error)
       })
       break
-    // case 'actor':
-    //   datafromDB.getFilmsByActor(searchTerm)
+    // case 'placeholder':
+    //   datafromDB.someFunction(searchTerm)
     //   .then((results) => {
-    //     console.log({results})
     //     res.status(200)
     //     res.json({results})
     //   })
