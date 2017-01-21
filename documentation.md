@@ -79,6 +79,7 @@ Here are a list of the search parameters that are supported:
 | plotKeyword | Any string, e.g. "banana" | `/v1/films?plotKeyword=banana` |
 | hasPoster | `yes` or `no` | `/v1/films?hasPoster=yes` |
 | hasRuntime | `yes` or `no` | `/v1/films?hasRuntime=yes` |
+| hasReleaseDate | `yes` or `no` | `/v1/films?hasReleaseDate=yes` |
 | releaseMonth | The short forms of the months: `Jan`, `Feb`, `Mar`, `Apr`, `May`, `Jun`, `Jul`, `Aug`, `Sep`, `Oct`, `Nov`, `Dec`. | `/v1/films?releaseMonth=Sep` |
 
 <!-- | x | x | x | -->

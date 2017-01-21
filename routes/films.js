@@ -114,6 +114,16 @@ router.get('/films', function(req, res, next) {
         res.send(error)
       })
       break
+    case 'hasReleaseDate':
+      datafromDB.hasReleaseDate(searchTerm)
+      .then((results) => {
+        res.status(200)
+        res.json({results})
+      })
+      .catch(function(error) {
+        res.send(error)
+      })
+      break
     case 'releaseMonth':
       datafromDB.getFilmsByReleaseMonth(searchTerm)
       .then((results) => {

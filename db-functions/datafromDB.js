@@ -63,8 +63,9 @@ function hasRunTime(searchTerm) {
 function getFilmsByReleaseMonth(searchTerm) {
   return knex('films').where('released', 'like', '%' + searchTerm + '%')
 }
-function hasReleaseDate() {
-  return knex('films').where('released', '<>', 'unknown')
+function hasReleaseDate(searchTerm) {
+  if (searchTerm === 'yes') return knex('films').where('released', '<>', 'unknown')
+  else return knex('films').where('released', 'unknown')
 }
 
 // `SELECT * FROM films WHERE runtime <> "unknown" AND runtime BETWEEN + ${lowerLimit} AND ${upperLimit}`
