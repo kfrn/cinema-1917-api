@@ -135,10 +135,30 @@ router.get('/films', function(req, res, next) {
       })
       break
     case 'releaseDay':
-      datafromDB.hasReleaseDate()
-      .then((results) => {
-        console.log("this many results: ", results.length)
-        // TODO: need to slice date to just get day!
+      datafromDB.hasReleaseDate('yes')
+      .then((initialResults) => {
+        // console.log({initialResults})
+
+        // Test with title - working
+        // var filtered = initialResults.filter((item) => {
+        //   if (/green/i.test(item.title)) return item
+        // })
+        // console.log({filtered})
+
+        // this works
+        // for (var i = 0; i < initialResults.length; i++) {
+        //     if (/\d\d/.test(initialResults[i].released) ) // gives true/false
+        //     console.log(initialResults[i].released)
+        // }
+
+        var filtered = initialResults.filter((item) => {
+          var firstNumber = item.released.slice(8, 10)
+          // console.log({firstNumber});
+          if (firstNumber === '18') return item
+          // need to slice!
+        })
+        console.log({filtered})
+
         // res.status(200)
         // res.json({results})
       })
