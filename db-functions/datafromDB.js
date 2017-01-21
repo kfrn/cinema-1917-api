@@ -13,7 +13,8 @@ module.exports = {
   getFilmsByPlotKeyword,
   getFilmsWithPoster,
   hasRunTime,
-  getFilmsByReleaseMonth
+  getFilmsByReleaseMonth,
+  hasReleaseDate
 }
 
 function getAllFilms() {
@@ -61,6 +62,9 @@ function hasRunTime(searchTerm) {
 
 function getFilmsByReleaseMonth(searchTerm) {
   return knex('films').where('released', 'like', '%' + searchTerm + '%')
+}
+function hasReleaseDate() {
+  return knex('films').where('released', '<>', 'unknown')
 }
 
 // `SELECT * FROM films WHERE runtime <> "unknown" AND runtime BETWEEN + ${lowerLimit} AND ${upperLimit}`

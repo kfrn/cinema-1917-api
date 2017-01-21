@@ -74,8 +74,8 @@ Here are a list of the search parameters that are supported:
 | director | Any string, e.g. "Lubitsch" | `/v1/films?director=lubitsch` |
 | writer | Any string, e.g. "Annunzio" | `/v1/films?director=Annunzio` |
 | actor | Any string, e.g. "Kholodnaya" | `/v1/films?actor=Kholodnaya` |
-| genre | <p>To see a list of genres represented in the dataset, click [here](./genres_and_countries.md#genres).</p> <p>To access a list of genres directly via the API, see [here](#country-and-genre-lists).</p>   | `/v1/films?genre=war` |
-| country | <p>To see a list of countries represented in the dataset, click [here](./genres_and_countries.md#countries).</p> <p>To access a list of countries directly via the API, see [here](#country-and-genre-lists).</p> | `/v1/films?country=Norway` |
+| genre | <p>To see a list of the genres represented in the dataset, click [here](./genres_and_countries.md#genres).</p> <p>To access a list of the genres directly via the API, see [here](#country-and-genre-lists).</p>   | `/v1/films?genre=war` |
+| country | <p>To see a list of the countries represented in the dataset, click [here](./genres_and_countries.md#countries).</p> <p>To access a list of the countries directly via the API, see [here](#country-and-genre-lists).</p> | `/v1/films?country=Norway` |
 | plotKeyword | Any string, e.g. "banana" | `/v1/films?plotKeyword=banana` |
 | hasPoster | `yes` or `no` | `/v1/films?hasPoster=yes` |
 | hasRuntime | `yes` or `no` | `/v1/films?hasRuntime=yes` |

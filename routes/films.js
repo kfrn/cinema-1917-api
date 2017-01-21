@@ -124,17 +124,18 @@ router.get('/films', function(req, res, next) {
         res.send(error)
       })
       break
-    // case 'actor':
-    //   datafromDB.getFilmsByActor(searchTerm)
-    //   .then((results) => {
-    //     console.log({results})
-    //     res.status(200)
-    //     res.json({results})
-    //   })
-    //   .catch(function(error) {
-    //     res.send(error)
-    //   })
-    //   break
+    case 'releaseDay':
+      datafromDB.hasReleaseDate()
+      .then((results) => {
+        console.log("this many results: ", results.length)
+        // TODO: need to slice date to just get day!
+        // res.status(200)
+        // res.json({results})
+      })
+      .catch(function(error) {
+        res.send(error)
+      })
+      break
     // case 'actor':
     //   datafromDB.getFilmsByActor(searchTerm)
     //   .then((results) => {
