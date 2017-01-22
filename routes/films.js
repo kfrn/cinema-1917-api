@@ -6,8 +6,8 @@ const datafromDB = require('../db-functions/datafromDB')
 // http://localhost:3000/api/v1/random/
 router.get('/random/', function (req, res, next) {
   datafromDB.getAllFilms()
-    .then((req) => {
-      var randomFilm = req[Math.floor(Math.random() * req.length)]
+    .then((results) => {
+      var randomFilm = results[Math.floor(Math.random() * results.length)]
       console.log({randomFilm})
       res.status(200)
       res.json({randomFilm})
@@ -166,6 +166,19 @@ router.get('/films', function (req, res, next) {
     default:
       res.send('Please use a valid query')
   }
+})
+
+/* GET all films - 'SECRET' route! Not in documentation */
+// http://localhost:3000/api/v1/all/
+router.get('/all/', function (req, res, next) {
+  datafromDB.getAllFilms()
+    .then((results) => {
+      res.status(200)
+      res.json({results})
+    })
+    .catch(function (error) {
+      res.send(error)
+    })
 })
 
 module.exports = router
