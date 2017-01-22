@@ -1,8 +1,8 @@
 
-exports.up = function(knex, Promise) {
-  console.log("Initial table creation")
+exports.up = function (knex, Promise) {
+  console.log('Initial table creation')
 
-  return knex.schema.createTableIfNotExists("films", function(table) {
+  return knex.schema.createTableIfNotExists('films', function (table) {
     table.increments('id')
     table.string('title')
     table.integer('year')
@@ -22,8 +22,8 @@ exports.up = function(knex, Promise) {
   })
 }
 
-exports.down = function(knex, Promise) {
-  return knex.schema.dropTableIfExists("films").then(function() {
-    console.log("Films table dropped")
+exports.down = function (knex, Promise) {
+  return knex.schema.dropTableIfExists('films').then(function () {
+    console.log('Films table dropped')
   })
 }

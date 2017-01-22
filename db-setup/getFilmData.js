@@ -3,11 +3,10 @@ const addFilmtoDB = require('./addFilmtoDB')
 
 module.exports = getFilmData
 
-function getFilmData(id) {
-
-  omdb.get({imdb: id}, true, function(err, res) {
+function getFilmData (id) {
+  omdb.get({imdb: id}, true, function (err, res) {
     if (err) return console.error(err)
-    if (!res) return console.log("Film not found!")
+    if (!res) return console.log('Film not found!')
 
     var newFilm = {
       title: res.title,
@@ -31,29 +30,29 @@ function getFilmData(id) {
     // console.log({newFilm})
 
     addFilmtoDB(newFilm)
-    .then(function(newFilm) {
-      console.log("Film added")
+    .then(function (newFilm) {
+      console.log('Film added')
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error)
     })
   })
 }
 
-function formatResult(input) {
+function formatResult (input) {
   if (input === null) return 'unknown'
   else if (typeof input === 'string') return input
   else if (input.length === 0) return 'unknown'
   else if (input.length === 1) return input[0]
-  else return input.join(", ")
+  else return input.join(', ')
 }
 
-function isNull(input) {
+function isNull (input) {
   if (input) return String(input)
   else return 'unknown'
 }
 
-function formatPlot(input) {
+function formatPlot (input) {
   if (input) return input
   else return 'unknown'
 }

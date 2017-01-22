@@ -7,8 +7,8 @@ module.exports = {
   extractIDs
 }
 
-function getHTML(url) {
-  return new Promise (function (resolve, reject) {
+function getHTML (url) {
+  return new Promise(function (resolve, reject) {
     request
     .get(url)
     .end(function (error, res) {
@@ -21,16 +21,16 @@ function getHTML(url) {
   })
 }
 
-function extractURLs(html) {
+function extractURLs (html) {
   $ = cheerio.load(html)
   var listURLs = []
-  URLs = $('.lister-item-header a').each(function() {
+  URLs = $('.lister-item-header a').each(function () {
     listURLs.push($(this).attr('href'))
   })
   return listURLs
 }
 
-function extractIDs(arrayofURLs) {
+function extractIDs (arrayofURLs) {
   var IMDbIDs = arrayofURLs.map(elem => elem.match(/tt\d+/))
   return IMDbIDs.map(elem => elem[0])
 }

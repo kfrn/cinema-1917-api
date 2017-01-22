@@ -1,10 +1,10 @@
-var express = require('express')
-var router = express.Router()
-var datafromDB = require('../db-functions/datafromDB')
+const express = require('express')
+const router = express.Router()
+const datafromDB = require('../db-functions/datafromDB')
 
 /* GET random film */
 // http://localhost:3000/api/v1/random/
-router.get('/random/', function(req, res, next) {
+router.get('/random/', function (req, res, next) {
   datafromDB.getAllFilms()
     .then((req) => {
       var randomFilm = req[Math.floor(Math.random() * req.length)]
@@ -12,14 +12,14 @@ router.get('/random/', function(req, res, next) {
       res.status(200)
       res.json({randomFilm})
     })
-    .catch(function(error) {
+    .catch(function (error) {
       res.send(error)
     })
 })
 
-/* GET films via keyword search for title, director, writer or actor */
+/* GET films via search */
 // http://localhost:3000/api/v1/films?title=green
-router.get('/films', function(req, res, next) {
+router.get('/films', function (req, res, next) {
   var searchType = Object.keys(req.query)[0]
   var searchTerm = req.query[Object.keys(req.query)[0]]
   console.log({searchType}, {searchTerm})
@@ -30,7 +30,7 @@ router.get('/films', function(req, res, next) {
         res.status(200)
         res.json({results})
       })
-      .catch(function(error) {
+      .catch(function (error) {
         res.send(error)
       })
       break
@@ -40,7 +40,7 @@ router.get('/films', function(req, res, next) {
         res.status(200)
         res.json({results})
       })
-      .catch(function(error) {
+      .catch(function (error) {
         res.send(error)
       })
       break
@@ -50,7 +50,7 @@ router.get('/films', function(req, res, next) {
         res.status(200)
         res.json({results})
       })
-      .catch(function(error) {
+      .catch(function (error) {
         res.send(error)
       })
       break
@@ -60,7 +60,7 @@ router.get('/films', function(req, res, next) {
         res.status(200)
         res.json({results})
       })
-      .catch(function(error) {
+      .catch(function (error) {
         res.send(error)
       })
       break
@@ -70,7 +70,7 @@ router.get('/films', function(req, res, next) {
         res.status(200)
         res.json({results})
       })
-      .catch(function(error) {
+      .catch(function (error) {
         res.send(error)
       })
       break
@@ -80,7 +80,7 @@ router.get('/films', function(req, res, next) {
         res.status(200)
         res.json({results})
       })
-      .catch(function(error) {
+      .catch(function (error) {
         res.send(error)
       })
       break
@@ -90,7 +90,7 @@ router.get('/films', function(req, res, next) {
         res.status(200)
         res.json({results})
       })
-      .catch(function(error) {
+      .catch(function (error) {
         res.send(error)
       })
       break
@@ -100,7 +100,7 @@ router.get('/films', function(req, res, next) {
         res.status(200)
         res.json({results})
       })
-      .catch(function(error) {
+      .catch(function (error) {
         res.send(error)
       })
       break
@@ -110,7 +110,7 @@ router.get('/films', function(req, res, next) {
         res.status(200)
         res.json({results})
       })
-      .catch(function(error) {
+      .catch(function (error) {
         res.send(error)
       })
       break
@@ -120,7 +120,7 @@ router.get('/films', function(req, res, next) {
         res.status(200)
         res.json({results})
       })
-      .catch(function(error) {
+      .catch(function (error) {
         res.send(error)
       })
       break
@@ -130,7 +130,7 @@ router.get('/films', function(req, res, next) {
         res.status(200)
         res.json({results})
       })
-      .catch(function(error) {
+      .catch(function (error) {
         res.send(error)
       })
       break
@@ -148,7 +148,7 @@ router.get('/films', function(req, res, next) {
           res.status(200)
           res.json({results})
         })
-        .catch(function(error) {
+        .catch(function (error) {
           res.send(error)
         })
       }
