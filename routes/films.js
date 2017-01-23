@@ -21,7 +21,7 @@ router.get('/random/', function (req, res, next) {
 // http://localhost:3000/api/v1/films?title=green
 router.get('/films', function (req, res, next) {
   var searchType = Object.keys(req.query)[0]
-  var searchTerm = req.query[Object.keys(req.query)[0]]
+  var searchTerm = req.query[Object.keys(req.query)[0]].toLowerCase()
   console.log({searchType}, {searchTerm})
   switch (searchType) {
     case 'title':
