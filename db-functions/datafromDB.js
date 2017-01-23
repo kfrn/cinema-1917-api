@@ -21,12 +21,13 @@ function getAllFilms () {
   return knex('films')
 }
 
+// SELECT * FROM films WHERE title LIKE lower('%green%')
 function getFilmsByTitle (searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE title LIKE lower(\'%' + searchTerm + '%\')')
+  return knex.raw(`SELECT * FROM films WHERE title LIKE lower('%${searchTerm}%')`)
 }
 
 function getFilmsByDirector (searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE director LIKE lower(\'%' + searchTerm + '%\')')
+  return knex.raw(`SELECT * FROM films WHERE director LIKE lower('%${searchTerm}%')`)
 }
 
 function getFilmsByWriter (searchTerm) {
