@@ -84,16 +84,26 @@ Here are a list of the search parameters that are supported:
 
 ##### Search notes  
 
+* The search is currently **case-sensitive**, so `Bauer` will return a list of matches, but `bauer` will not.
+  * It is therefore necessary to capitalise search terms when searching by `director`, `writer`, `actor`, or `country`. Capitalisation is also recommended for `title` searches.  
+
+
 * The text search queries operate via **pattern matching**, meaning that 'gold' will also match 'golden', etc.
 
 * To match a **full name or phrase**, the space(s) between the words must be replaced by a plus sign:
       ```
       /v1/films?country=South+Africa  
       /v1/films?director=Yevgeni+Bauer  
-      /v1/films?director=Cecil+B.+DeMille
       ```  
 
-* **Capitalization is not required**, as the search is not case-sensitive, but initials must be followed by a full stop, as shown above.
+* In names (or elsewhere), initials must be followed by a full stop. Correct:
+      ```
+      /v1/films?director=Cecil+B.+DeMille
+      ```  
+  Incorrect:
+      ```
+      /v1/films?director=Cecil+B+DeMille
+      ```  
 
 #### Response
 
