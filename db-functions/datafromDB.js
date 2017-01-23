@@ -22,7 +22,7 @@ function getAllFilms () {
 }
 
 function getFilmsByTitle (searchTerm) {
-  return knex('films').where('title', 'like', '%' + searchTerm + '%')
+  return knex('films').where('title', 'ILIKE', '%' + searchTerm + '%')
 }
 
 function getFilmsByDirector (searchTerm) {
