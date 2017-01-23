@@ -1,6 +1,6 @@
 # API Documentation
 
-This API returns JSON-encoded data on films released in 1917.  
+This API returns JSON-encoded data on films released in 1917. It's live on Heroku at http://cinema-1917-api.herokuapp.com/api.
 
 As the dataset is static, the API only supports GET requests. It can do the following:
 
