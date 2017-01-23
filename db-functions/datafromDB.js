@@ -21,33 +21,32 @@ function getAllFilms () {
   return knex('films')
 }
 
-// SELECT * FROM films WHERE title LIKE lower('%green%')
 function getFilmsByTitle (searchTerm) {
-  return knex.raw(`SELECT * FROM films WHERE title LIKE lower('%${searchTerm}%')`)
+  return knex('films').where('title', 'like', '%' + searchTerm + '%')
 }
 
 function getFilmsByDirector (searchTerm) {
-  return knex.raw(`SELECT * FROM films WHERE director LIKE lower('%${searchTerm}%')`)
+  return knex('films').where('director', 'like', '%' + searchTerm + '%')
 }
 
 function getFilmsByWriter (searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE writers LIKE lower(\'%' + searchTerm + '%\')')
+  return knex('films').where('writers', 'like', '%' + searchTerm + '%')
 }
 
 function getFilmsByActor (searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE actors LIKE lower(\'%' + searchTerm + '%\')')
+  return knex('films').where('actors', 'like', '%' + searchTerm + '%')
 }
 
 function getFilmsByGenre (searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE genres LIKE lower(\'%' + searchTerm + '%\')')
+  return knex('films').where('genres', 'like', '%' + searchTerm + '%')
 }
 
 function getFilmsByCountry (searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE countries LIKE lower(\'%' + searchTerm + '%\')')
+  return knex('films').where('countries', 'like', '%' + searchTerm + '%')
 }
 
 function getFilmsByPlotKeyword (searchTerm) {
-  return knex.raw('SELECT * FROM films WHERE plot LIKE lower(\'%' + searchTerm + '%\')')
+  return knex('films').where('plot', 'like', '%' + searchTerm + '%')
 }
 
 function getFilmsWithPoster (searchTerm) {
@@ -64,7 +63,6 @@ function hasRunTime (searchTerm) {
 function getFilmsByReleaseMonth (searchTerm) {
   return knex('films').where('released', 'like', '%' + searchTerm + '%')
 }
-
 function hasReleaseDate (searchTerm) {
   if (searchTerm === 'yes') return knex('films').where('released', '<>', 'unknown')
   else return knex('films').where('released', 'unknown')
