@@ -80,15 +80,11 @@ Here are a list of the search parameters that are supported:
 | releaseMonth | The short forms of the months: `Jan`, `Feb`, `Mar`, `Apr`, `May`, `Jun`, `Jul`, `Aug`, `Sep`, `Oct`, `Nov`, `Dec`. | `/v1/films?releaseMonth=Sep` |
 | releaseDay | Number in the range 1 to 31 | `/v1/films?releaseDay=13` |
 
-<!-- | x | x | x | -->
-
 ##### Search notes  
 
-* The search is currently **case-sensitive**, so `Bauer` will return a list of matches, but `bauer` will not.
-  * It is therefore necessary to capitalise search terms when searching by `director`, `writer`, `actor`, or `country`. Capitalisation is also recommended for `title` searches.  
+* The search is **not case-sensitive**: `Bauer` will return the same list of matches as `bauer`.
 
-
-* The text search queries operate via **pattern matching**, meaning that 'gold' will also match 'golden', etc.
+* The text search queries operate via **pattern matching**, meaning that 'gold' will also match 'golden', 'gli' will also match 'moglie', etc.
 
 * To match a **full name or phrase**, the space(s) between the words must be replaced by a plus sign:
       ```

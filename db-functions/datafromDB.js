@@ -21,32 +21,34 @@ function getAllFilms () {
   return knex('films')
 }
 
+// Note that ILIKE is PostgreSQL-specific and will throw an error in SQLite.
+
 function getFilmsByTitle (searchTerm) {
   return knex('films').where('title', 'ILIKE', '%' + searchTerm + '%')
 }
 
 function getFilmsByDirector (searchTerm) {
-  return knex('films').where('director', 'like', '%' + searchTerm + '%')
+  return knex('films').where('director', 'ILIKE', '%' + searchTerm + '%')
 }
 
 function getFilmsByWriter (searchTerm) {
-  return knex('films').where('writers', 'like', '%' + searchTerm + '%')
+  return knex('films').where('writers', 'ILIKE', '%' + searchTerm + '%')
 }
 
 function getFilmsByActor (searchTerm) {
-  return knex('films').where('actors', 'like', '%' + searchTerm + '%')
+  return knex('films').where('actors', 'ILIKE', '%' + searchTerm + '%')
 }
 
 function getFilmsByGenre (searchTerm) {
-  return knex('films').where('genres', 'like', '%' + searchTerm + '%')
+  return knex('films').where('genres', 'ILIKE', '%' + searchTerm + '%')
 }
 
 function getFilmsByCountry (searchTerm) {
-  return knex('films').where('countries', 'like', '%' + searchTerm + '%')
+  return knex('films').where('countries', 'ILIKE', '%' + searchTerm + '%')
 }
 
 function getFilmsByPlotKeyword (searchTerm) {
-  return knex('films').where('plot', 'like', '%' + searchTerm + '%')
+  return knex('films').where('plot', 'ILIKE', '%' + searchTerm + '%')
 }
 
 function getFilmsWithPoster (searchTerm) {
@@ -61,8 +63,9 @@ function hasRunTime (searchTerm) {
 }
 
 function getFilmsByReleaseMonth (searchTerm) {
-  return knex('films').where('released', 'like', '%' + searchTerm + '%')
+  return knex('films').where('released', 'ILIKE', '%' + searchTerm + '%')
 }
+
 function hasReleaseDate (searchTerm) {
   if (searchTerm === 'yes') return knex('films').where('released', '<>', 'unknown')
   else return knex('films').where('released', 'unknown')
