@@ -7,7 +7,7 @@ const categoryData = require('../db-functions/helperFNs')
 router.get('/countries/', function (req, res, next) {
   categoryData.getCountries()
     .then(function (req) {
-      var countryList = req.map((elem) => elem.countries).join(', ').split(', ').filter((item, idx, self) => idx === self.indexOf(item)).sort()
+    let countryList = req.map((elem) => elem.countries).join(', ').split(', ').filter((item, idx, self) => idx === self.indexOf(item)).sort()
       res.status(200)
       res.json({countryList})
     })
@@ -20,7 +20,7 @@ router.get('/countries/', function (req, res, next) {
 router.get('/genres/', function (req, res, next) {
   categoryData.getGenres()
     .then(function (req) {
-      var genres = req.map((elem) => elem.genres).join(', ').split(', ').filter((item, idx, self) => idx === self.indexOf(item)).sort()
+    let genres = req.map((elem) => elem.genres).join(', ').split(', ').filter((item, idx, self) => idx === self.indexOf(item)).sort()
       res.status(200)
       res.json({genres})
     })

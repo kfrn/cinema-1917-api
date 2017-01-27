@@ -7,7 +7,7 @@ const datafromDB = require('../db-functions/datafromDB')
 router.get('/random/', function (req, res, next) {
   datafromDB.getAllFilms()
     .then((results) => {
-      var randomFilm = results[Math.floor(Math.random() * results.length)]
+      const randomFilm = results[Math.floor(Math.random() * results.length)]
       console.log({randomFilm})
       res.status(200)
       res.json({randomFilm})
@@ -20,8 +20,8 @@ router.get('/random/', function (req, res, next) {
 /* GET films via search */
 // http://localhost:3000/api/v1/films?title=green
 router.get('/films', function (req, res, next) {
-  var searchType = Object.keys(req.query)[0]
-  var searchTerm = req.query[Object.keys(req.query)[0]]
+  const searchType = Object.keys(req.query)[0]
+  const searchTerm = req.query[Object.keys(req.query)[0]]
   console.log({searchType}, {searchTerm})
   switch (searchType) {
     case 'title':
@@ -141,8 +141,8 @@ router.get('/films', function (req, res, next) {
         datafromDB.hasReleaseDate('yes')
         .then((initialResults) => {
           if (searchTerm.length === 1) searchTerm = '0' + searchTerm
-          var results = initialResults.filter((item) => {
-            var firstNumber = item.released.slice(8, 10)
+          const results = initialResults.filter((item) => {
+            const firstNumber = item.released.slice(8, 10)
             if (firstNumber === searchTerm) return item
           })
           res.status(200)

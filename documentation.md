@@ -177,6 +177,13 @@ If no results are found, the result will be an empty array. For example, the req
 
 If a request is badly formed, the message `Please use a valid query` will be returned.
 
+If running the server locally, several of the queries will not work correctly, as they use PostgreSQL-specific expression `ILIKE`. Such queries to the local (SQLite) database will return the following:
+
+    {
+      "errno": 1,
+      "code": "SQLITE_ERROR"
+    }
+
 ([back to top](#api-documentation))
 
 ### Country and genre lists
